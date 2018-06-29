@@ -1,5 +1,5 @@
 {
-  "name": "watcode.api",
+  "name": "watcode",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "InJung Chung",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/datastore": "^1.4.1",
     "serverless-google-cloudfunctions": "^1.1.0"
   }
 }

@@ -1,4 +1,4 @@
-service: watcode.api
+service: artworks
 
 provider:
   name: google
@@ -19,8 +19,8 @@ package:
     - .git/**
 
 functions:
-  first:
-    handler: http
+  recent:
+    handler: recent
     events:
       - http: path
 
