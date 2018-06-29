@@ -1,0 +1,14 @@
+{
+  "name": "watcode.api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "InJung Chung",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-google-cloudfunctions": "^1.1.0"
+  }
+}
