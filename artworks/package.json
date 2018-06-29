@@ -1,12 +1,9 @@
 {
-  "name": "watcode",
+  "name": "artworks",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "InJung Chung",
+  "author": "InJung Chung <mu29@yeoubi.net>",
   "license": "MIT",
   "dependencies": {
     "@google-cloud/datastore": "^1.4.1",

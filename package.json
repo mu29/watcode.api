@@ -1,0 +1,11 @@
+{
+  "name": "watcode.api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mu29/watcode.api.git",
+  "author": "InJung Chung <mu29@yeoubi.net>",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "cd artworks && sls deploy"
+  }
+}
