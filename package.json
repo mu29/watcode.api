@@ -1,11 +1,15 @@
 {
-  "name": "watcode.api",
-  "version": "1.0.0",
+  "name": "watcode",
+  "version": "0.1.0",
+  "description": "",
   "main": "index.js",
-  "repository": "https://github.com/mu29/watcode.api.git",
+  "scripts": {
+    "deploy": "sls deploy"
+  },
   "author": "InJung Chung <mu29@yeoubi.net>",
   "license": "MIT",
-  "scripts": {
-    "deploy": "cd artworks && sls deploy"
+  "dependencies": {
+    "@google-cloud/datastore": "^1.4.1",
+    "serverless-google-cloudfunctions": "^1.1.0"
   }
 }
