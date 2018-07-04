@@ -1,7 +1,5 @@
 'use strict'
 
-const datastore = require('@google-cloud/datastore')()
-
 let artworkModules = null
 let reactionModules = null
 
@@ -12,7 +10,7 @@ export const artworks = (request, response) => {
   }
 
   artworkModules = artworkModules || require('./modules/artworks')
-  artworkModules.readArtworkList(request, response, datastore)
+  artworkModules.readArtworkList(request, response)
 }
 
 export const views = (request, response) => {
@@ -27,5 +25,5 @@ export const views = (request, response) => {
   }
 
   reactionModules = reactionModules || require('./modules/reactions')
-  reactionModules.createView(request, response, datastore)
+  reactionModules.createView(request, response)
 }

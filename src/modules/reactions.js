@@ -1,4 +1,6 @@
-'use strict'
+import Datastore from '@google-cloud/datastore'
+
+const datastore = Datastore()
 
 /**
  * 작품의 조회 횟수를 늘려줍니다.
@@ -6,19 +8,31 @@
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-exports.createView = async (request, response, datastore) => {
+export const createView = async (request, response) => {
   const pathRegex = /artworks\/(\d+)\/views/
   const code = parseInt(request.url.match(pathRegex)[1])
-  const key = datastore.key(['Artwork', code])
-  const artwork = await datastore.get(key)
 
+  const artworkKey = datastore.key(['Artwork', code])
+  const artwork = await datastore.get(artworkKey)
   await datastore.save({
-    key: key,
+    key: artworkKey,
     data: {
       ...artwork[0],
-      views: (artwork.views || 0) + 1
+      views: (artwork[0].views || 0) + 1
     },
   })
+
+  const today = parseInt(new Date().toISOString().split('T')[0].replace(/-/g, ''))
+  const counterKey = datastore.key(['Artwork', code, 'Counter', today])
+  const counter = await datastore.get(counterKey)
+  await datastore.save({
+    key: counterKey,
+    data: {
+      ...(counter[0] || {}),
+      views: ((counter[0] || {}).views || 0) + 1,
+    }
+  })
+
   response.status(201).end()
 }
 
@@ -28,7 +42,7 @@ exports.createView = async (request, response, datastore) => {
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-exports.createComment = (request, response) => {
+export const createComment = (request, response) => {
 }
 
 /**
@@ -37,5 +51,5 @@ exports.createComment = (request, response) => {
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-exports.readCommentList = (request, response) => {
+export const readCommentList = (request, response) => {
 }

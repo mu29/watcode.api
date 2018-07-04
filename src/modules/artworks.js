@@ -1,5 +1,6 @@
-'use strict'
+import Datastore from '@google-cloud/datastore'
 
+const datastore = Datastore()
 const RESULTS_PER_PAGE = 15
 
 /**
@@ -9,7 +10,7 @@ const RESULTS_PER_PAGE = 15
  * @param {String} request.query.cursor 목록의 첫 아이템의 위치입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-exports.readArtworkList = (request, response, datastore) => {
+export const readArtworkList = (request, response) => {
   const query = datastore
     .createQuery('Artwork')
     .order('code', { descending: true })
@@ -40,5 +41,5 @@ exports.readArtworkList = (request, response, datastore) => {
  * @param {Number} request.query.period 작품에 대한 반응을 집계할 기간입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-exports.popularArtworkList = (request, response) => {
+export const popularArtworkList = (request, response) => {
 }
