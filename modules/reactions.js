@@ -8,7 +8,7 @@
  */
 exports.createView = async (request, response, datastore) => {
   const pathRegex = /artworks\/(\d+)\/views/
-  const code = parseInt(request.path.match(pathRegex)[1])
+  const code = parseInt(request.url.match(pathRegex)[1])
   const key = datastore.key(['Artwork', code])
   const artwork = await datastore.get(key)
 

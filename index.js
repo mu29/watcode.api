@@ -13,7 +13,7 @@ exports.artworks = (request, response) => {
 
   artworkModules = artworkModules || require('./modules/artworks')
   artworkModules.readArtworkList(request, response, datastore)
-};
+}
 
 exports.views = (request, response) => {
   if (request.method !== 'POST') {
@@ -21,11 +21,11 @@ exports.views = (request, response) => {
     return
   }
 
-  if (!request.path.match(/artworks\/(\d+)\/.*/)) {
+  if (!request.url.match(/artworks\/(\d+)\/.*/)) {
     response.status(422).send({ message: '함수의 경로가 잘못되었습니다.' })
     return
   }
 
-  reactionModules = reactionModules || require('./modules/artworks')
+  reactionModules = reactionModules || require('./modules/reactions')
   reactionModules.createView(request, response, datastore)
 }
