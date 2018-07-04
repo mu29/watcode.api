@@ -5,7 +5,7 @@ const datastore = require('@google-cloud/datastore')()
 let artworkModules = null
 let reactionModules = null
 
-exports.artworks = (request, response) => {
+export const artworks = (request, response) => {
   if (request.method !== 'GET') {
     response.status(422).send('해당 메소드는 지원하지 않습니다.')
     return
@@ -15,7 +15,7 @@ exports.artworks = (request, response) => {
   artworkModules.readArtworkList(request, response, datastore)
 }
 
-exports.views = (request, response) => {
+export const views = (request, response) => {
   if (request.method !== 'POST') {
     response.status(422).send('해당 메소드는 지원하지 않습니다.')
     return

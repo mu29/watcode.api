@@ -11,11 +11,11 @@ exports.createView = async (request, response, datastore) => {
   const code = parseInt(request.url.match(pathRegex)[1])
   const key = datastore.key(['Artwork', code])
   const artwork = await datastore.get(key)
-
+  console.log(artwork)
   await datastore.save({
     key: key,
     data: {
-      ...artwork,
+      ...artwork[0],
       views: (artwork.views || 0) + 1
     },
   })
