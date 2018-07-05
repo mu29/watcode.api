@@ -20,9 +20,9 @@ export default async (request, response) => {
   }
 
   try {
-    const [entities, info] = await datastore.runQuery(query)
+    const [artworks, info] = await datastore.runQuery(query)
     response.status(200).send({
-      artworks: entities,
+      artworks,
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
