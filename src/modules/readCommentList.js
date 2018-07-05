@@ -4,5 +4,5 @@
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-export const readCommentList = (request, response) => {
+export default (request, response) => {
 }

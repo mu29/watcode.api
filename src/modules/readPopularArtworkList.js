@@ -6,5 +6,5 @@
  * @param {Number} request.query.period 작품에 대한 반응을 집계할 기간입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-export const popularArtworkList = (request, response) => {
+export default (request, response) => {
 }

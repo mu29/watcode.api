@@ -9,7 +9,7 @@ const RESULTS_PER_PAGE = 15
  * @param {String} request.query.cursor 목록의 첫 아이템의 위치입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
-export const readArtworkList = (request, response) => {
+export default (request, response) => {
   const query = datastore
     .createQuery('Artwork')
     .order('code', { descending: true })

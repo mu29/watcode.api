@@ -1,6 +1,6 @@
 import { createView } from '../modules'
 
-const views = (request, response) => {
+export default (request, response) => {
   if (request.method !== 'POST') {
     response.status(422).send('해당 메소드는 지원하지 않습니다.')
     return
@@ -13,5 +13,3 @@ const views = (request, response) => {
 
   createView(request, response)
 }
-
-export default views
