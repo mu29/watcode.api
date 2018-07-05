@@ -1,4 +1,4 @@
-import { createView } from '../modules'
+import { updateView } from '../modules'
 
 export default (request, response) => {
   if (request.method !== 'POST') {
@@ -11,5 +11,5 @@ export default (request, response) => {
     return
   }
 
-  createView(request, response)
+  updateView(request, response)
 }
