@@ -23,7 +23,7 @@ export default async (request, response) => {
   try {
     const [entities, info] = await datastore.runQuery(query)
     const keys = entities.map(e => datastore.key(['Artwork', e.code]))
-    const artworks = await datastore.geoPoint(keys)
+    const [artworks] = await datastore.get(keys)
 
     response.status(200).send({
       artworks,

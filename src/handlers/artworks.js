@@ -6,7 +6,7 @@ export default (request, response) => {
     return
   }
 
-  if (request.url.match(/artworks\/popular\/.*/)) {
+  if (request.url.match(/artworks\/popular.*/)) {
     readPopularArtworkList(request, response)
     return
   }

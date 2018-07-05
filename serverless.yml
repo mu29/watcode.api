@@ -16,12 +16,12 @@ package:
     - .git/**
 
 functions:
-  readArtworkList:
+  artworks:
     handler: artworks
     events:
       - http: path
 
-  createView:
+  views:
     handler: views
     events:
       - http: path

@@ -5,7 +5,7 @@ export const datastore = Datastore()
 export const update = async (key, data) => {
   try {
     const entityKey = datastore.key(key)
-    const entity = (await datastore.get(entityKey))[0] || {}
+    const [entity] = await datastore.get(entityKey) || {}
     await datastore.save({
       key: entityKey,
       data: {
