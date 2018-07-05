@@ -7,6 +7,9 @@
     }, {
       "source": "/artworks",
       "function": "artworks"
+    }, {
+      "source": "/artworks/**",
+      "function": "artworks"
     }],
     "ignore": [
       "firebase.json",
