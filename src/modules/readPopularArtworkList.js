@@ -22,11 +22,12 @@ export default async (request, response) => {
 
   try {
     const [entities, info] = await datastore.runQuery(query)
-    const keys = entities.map(e => datastore.key(['Artwork', e.code]))
+    const codes = entities.map(e => e.code)
+    const keys = codes.map(code => datastore.key(['Artwork', code]))
     const [artworks] = await datastore.get(keys)
 
     response.status(200).send({
-      artworks,
+      artworks: artworks.sort((a, b) => codes.indexOf(a.code) > codes.indexOf(b.code)),
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
