@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "public",
+    "rewrites": [{
+      "source": "/artworks/*/views",
+      "function": "views"
+    }, {
+      "source": "/artworks",
+      "function": "artworks"
+    }, {
+      "source": "/artworks/**",
+      "function": "artworks"
+    }],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
