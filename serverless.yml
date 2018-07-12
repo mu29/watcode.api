@@ -21,6 +21,11 @@ functions:
     events:
       - http: path
 
+  comments:
+    handler: comments
+    events:
+      - http: path
+
   views:
     handler: views
     events:
