@@ -27,7 +27,7 @@ export default async (request, response) => {
   try {
     const [comments, info] = await datastore.runQuery(query)
     response.status(200).send({
-      comments,
+      comments: comments.map(({ author, content, createdAt }) => ({ author, content, createdAt })),
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
