@@ -7,6 +7,8 @@
     "build": "webpack",
     "deploy:env": "yarn build && sls deploy --stage $NODE_ENV",
     "deploy": "export NODE_ENV=dev && yarn deploy:env",
+    "deploy:index": "gcloud datastore create-indexes index.yaml",
+    "deploy:hosting": "firebase deploy",
     "deploy:production": "export NODE_ENV=production && yarn deploy:env",
     "deploy:stage": "export NODE_ENV=stage && yarn deploy:env"
   },

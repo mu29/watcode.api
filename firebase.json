@@ -5,6 +5,9 @@
       "source": "/artworks/*/views",
       "function": "views"
     }, {
+      "source": "/artworks/*/comments",
+      "function": "comments"
+    }, {
       "source": "/artworks",
       "function": "artworks"
     }, {
