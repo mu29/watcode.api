@@ -1,0 +1,8 @@
+indexes:
+
+- kind: Comment
+  properties:
+  - name: artworkId
+  - name: createdAt
+    direction: desc
+
