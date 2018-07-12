@@ -12,7 +12,7 @@ const RESULTS_PER_PAGE = 15
 export default async (request, response) => {
   const query = datastore
     .createQuery('Artwork')
-    .order('code', { descending: true })
+    .order('id', { descending: true })
     .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
