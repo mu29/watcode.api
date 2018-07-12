@@ -30,9 +30,9 @@ export default async (request, response) => {
 
       return {
         code,
-        day: sum(source, 2),
-        week: sum(source, 7),
-        month: sum(source, 30),
+        daily: sum(source, 2),
+        weekly: sum(source, 7),
+        monthly: sum(source, 30),
         source: source.reverse(),
         updatedAt: today,
       }

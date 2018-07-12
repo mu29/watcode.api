@@ -13,7 +13,7 @@ const RESULTS_PER_PAGE = 15
 export default async (request, response) => {
   const query = datastore
     .createQuery('Counter')
-    .order(request.query.period || 'day', { descending: true })
+    .order(request.query.period || 'daily', { descending: true })
     .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
