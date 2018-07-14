@@ -12,7 +12,7 @@ export default async (request, response) => {
   const id = parseInt(request.url.match(pathRegex)[1])
 
   try {
-    const key = datastore.key('Artwork', id)
+    const key = datastore.key(['Artwork', id])
     const [artwork = {}] = await datastore.get(key)
     response.status(200).send({ artwork })
   } catch (error) {
