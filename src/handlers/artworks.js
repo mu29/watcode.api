@@ -1,4 +1,8 @@
-import { readArtworkList, readPopularArtworkList } from '../modules'
+import {
+  readArtwork,
+  readArtworkList,
+  readPopularArtworkList,
+} from '../modules'
 
 export default (request, response) => {
   if (request.method === 'OPTIONS') {
@@ -13,6 +17,11 @@ export default (request, response) => {
 
   if (request.url.match(/artworks\/popular.*/)) {
     readPopularArtworkList(request, response)
+    return
+  }
+
+  if (request.url.match(/artworks\/(\d+)/)) {
+    readArtwork(request, response)
     return
   }
 
