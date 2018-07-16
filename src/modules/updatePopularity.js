@@ -12,7 +12,7 @@ export default async (id, value) => {
     const today = parseInt(Date.now() / (86400 * 1000))
     const source = popularity.source || Array(30).fill(0)
     // 날짜가 변경된 경우 가장 오래된 인기도 데이터를 삭제합니다.
-    let gap = today - popularity.updatedAt
+    let gap = today - (popularity.updatedAt || today)
     while (gap > 0) {
       source.shift()
       source.push(0)

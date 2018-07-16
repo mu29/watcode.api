@@ -6,7 +6,7 @@ const RESULTS_PER_PAGE = 100
  * 작품의 댓글 목록을 불러옵니다.
  *
  * @param {Object} request Cloud Function의 request context 입니다.
- * @param {String} request.url 요청 경로는 /artworks/{code}/comments 의 형태로 이루어져야 합니다.
+ * @param {String} request.url 요청 경로는 /artworks/{id}/comments 의 형태로 이루어져야 합니다.
  * @param {String} request.query.cursor 목록의 첫 아이템의 위치입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */

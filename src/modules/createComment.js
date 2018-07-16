@@ -5,7 +5,7 @@ import updatePopularity from './updatePopularity'
  * 작품에 댓글을 남깁니다.
  *
  * @param {Object} request Cloud Function의 request context 입니다.
- * @param {String} request.url 요청 경로는 /artworks/{code}/comments 의 형태로 이루어져야 합니다.
+ * @param {String} request.url 요청 경로는 /artworks/{id}/comments 의 형태로 이루어져야 합니다.
  * @param {Object} request.header.Authorization 댓글 작성자의 고유한 ID입니다.
  * @param {Object} request.body.author 댓글 작성자의 닉네임입니다.
  * @param {Object} request.body.content 댓글 내용입니다.
@@ -32,7 +32,7 @@ export default async (request, response) => {
       }
     })
     const { id } = apiResponse.mutationResults[0].key.path[0]
-    await updatePopularity(10)
+    await updatePopularity(artworkId, 10)
     response.status(201).send({
       id,
       email,
