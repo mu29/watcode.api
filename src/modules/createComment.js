@@ -1,4 +1,5 @@
 import { datastore } from '../services/database'
+import updatePopularity from './updatePopularity'
 
 /**
  * 작품에 댓글을 남깁니다.
@@ -13,23 +14,32 @@ import { datastore } from '../services/database'
 export default async (request, response) => {
   const pathRegex = /artworks\/(\d+)\/comments/
   const artworkId = parseInt(request.url.match(pathRegex)[1])
-  const content = request.body.content
-  const author = request.body.author
+  const { email, author, content } = request.body
   const userId = request.get('Authorization')
   const key = datastore.key('Comment')
+  const createdAt = new Date()
 
   try {
-    const [comment] = await datastore.save({
+    const [apiResponse] = await datastore.save({
       key,
       data: {
         artworkId,
         userId,
+        email,
         author,
         content,
-        createdAt: new Date(),
+        createdAt,
       }
     })
-    response.status(201).send(comment)
+    const { id } = apiResponse.mutationResults[0].key.path[0]
+    await updatePopularity(10)
+    response.status(201).send({
+      id,
+      email,
+      author,
+      content,
+      createdAt,
+    })
   } catch (error) {
     response.status(422).send(error)
   }
