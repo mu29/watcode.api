@@ -25,9 +25,16 @@ export default async (request, response) => {
   }
 
   try {
-    const [comments, info] = await datastore.runQuery(query)
+    const [entities, info] = await datastore.runQuery(query)
+    const comments = entities.map(entity => {
+      delete entity.userId
+      return {
+        id: entity[datastore.KEY].id,
+        ...entity,
+      }
+    })
     response.status(200).send({
-      comments: comments.map(({ author, content, createdAt }) => ({ author, content, createdAt })),
+      comments,
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
