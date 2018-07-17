@@ -19,6 +19,11 @@ export default async (request, response) => {
   const key = datastore.key('Comment')
   const createdAt = new Date()
 
+  if (!content || content.length === 0) {
+    response.status(422).send({ message: '빈 댓글을 달 수 없습니다.' })
+    return
+  }
+
   try {
     const [apiResponse] = await datastore.save({
       key,
