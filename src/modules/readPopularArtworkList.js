@@ -12,8 +12,8 @@ const RESULTS_PER_PAGE = 15
  */
 export default async (request, response) => {
   const query = datastore
-    .createQuery('Counter')
-    .order(request.query.period || 'day', { descending: true })
+    .createQuery('Popularity')
+    .order(request.query.period || 'daily', { descending: true })
     .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
@@ -22,12 +22,12 @@ export default async (request, response) => {
 
   try {
     const [entities, info] = await datastore.runQuery(query)
-    const codes = entities.map(e => e.code)
-    const keys = codes.map(code => datastore.key(['Artwork', code]))
+    const ids = entities.map(e => e.id)
+    const keys = ids.map(id => datastore.key(['Artwork', id]))
     const [artworks] = await datastore.get(keys)
 
     response.status(200).send({
-      artworks: artworks.sort((a, b) => codes.indexOf(a.code) > codes.indexOf(b.code)),
+      artworks: artworks.sort((a, b) => ids.indexOf(a.id) > ids.indexOf(b.id)),
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {

@@ -4,5 +4,3 @@ indexes:
   properties:
   - name: artworkId
   - name: createdAt
-    direction: desc
-
