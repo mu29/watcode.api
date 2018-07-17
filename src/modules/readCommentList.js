@@ -17,7 +17,7 @@ export default async (request, response) => {
   const query = datastore
     .createQuery('Comment')
     .filter('artworkId', artworkId)
-    .order('createdAt', { descending: true })
+    .order('createdAt')
     .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
