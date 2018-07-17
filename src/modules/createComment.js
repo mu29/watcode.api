@@ -1,4 +1,4 @@
-import { datastore } from '../services/database'
+import { datastore, update } from '../services/database'
 import updatePopularity from './updatePopularity'
 
 /**

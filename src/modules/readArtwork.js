@@ -1,4 +1,5 @@
-import { datastore } from '../services/database'
+import { datastore, update } from '../services/database'
+import updatePopularity from './updatePopularity'
 
 /**
  * 작품 내용을 보여줍니다.
@@ -20,6 +21,7 @@ export default async (request, response) => {
     ])
     response.status(200).send({ artwork })
   } catch (error) {
+    console.error(error)
     response.status(422).send(error)
   }
 }
