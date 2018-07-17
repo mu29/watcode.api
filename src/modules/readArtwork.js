@@ -14,6 +14,10 @@ export default async (request, response) => {
   try {
     const key = datastore.key(['Artwork', id])
     const [artwork = {}] = await datastore.get(key)
+    await Promise.all([
+      update(['Artwork', id], artwork => ({ views: (artwork.views || 0) + 1 })),
+      updatePopularity(id, 1),
+    ])
     response.status(200).send({ artwork })
   } catch (error) {
     response.status(422).send(error)

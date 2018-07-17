@@ -37,7 +37,10 @@ export default async (request, response) => {
       }
     })
     const { id } = apiResponse.mutationResults[0].key.path[0]
-    await updatePopularity(artworkId, 10)
+    await Promise.all([
+      update(['Artwork', artworkId], artwork => ({ comments: (artwork.comments || 0) + 1 })),
+      updatePopularity(artworkId, 10),
+    ])
     response.status(201).send({
       id,
       email,
