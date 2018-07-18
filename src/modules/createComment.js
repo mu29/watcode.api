@@ -49,6 +49,7 @@ export default async (request, response) => {
       createdAt,
     })
   } catch (error) {
+    console.error(error)
     response.status(422).send(error)
   }
 }
