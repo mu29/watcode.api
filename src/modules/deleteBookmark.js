@@ -21,13 +21,18 @@ export default async (request, response) => {
 
   try {
     const bookmark = await find('Bookmark', ['artworkId', id], ['userId', userId])
+    if (!bookmark) {
+      response.status(404).end()
+      return
+    }
+
     const key = datastore.key(['Bookmark', bookmark.id])
     await Promise.all([
       datastore.delete(key),
       updateCounter(id, 'bookmarks', -1),
       updatePopularity(id, -20),
     ])
-    response.status(200).end()
+    response.status(200).send({ id })
   } catch (error) {
     console.error(error)
     response.status(422).send(error)
