@@ -14,7 +14,7 @@ export default async (request, response) => {
   const id = parseInt(request.url.match(pathRegex)[1])
   const userId = request.get('Authorization')
   const key = datastore.key(['Comment', id])
-  const { artworkId } = request.query
+  const artworkId = parseInt(request.query.artworkId)
 
   if (!userId) {
     response.status(401).end()
