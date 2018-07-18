@@ -31,6 +31,7 @@ export default async (request, response) => {
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
+    console.error(error)
     response.status(422).send(error)
   }
 }

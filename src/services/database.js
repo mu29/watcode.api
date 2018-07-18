@@ -17,3 +17,15 @@ export const update = async (key, data) => {
     console.error(error)
   }
 }
+
+export const find = async (kind, ...filters) => {
+  let query = datastore.createQuery(kind).limit(1)
+  filters.forEach(filter => query = query.filter(filter[0], filter[1]))
+
+  const [entities] = await datastore.runQuery(query)
+  const entity = entities[0] || {}
+  return {
+    id: entity[datastore.KEY].id,
+    ...entity,
+  }
+}

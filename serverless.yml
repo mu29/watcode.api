@@ -26,8 +26,8 @@ functions:
     events:
       - http: path
 
-  views:
-    handler: views
+  bookmarks:
+    handler: bookmarks
     events:
       - http: path
 

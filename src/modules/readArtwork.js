@@ -1,5 +1,5 @@
-import { datastore, update } from '../services/database'
-import updatePopularity from './updatePopularity'
+import { datastore } from '../services/database'
+import { updateCounter, updatePopularity } from '../helpers'
 
 /**
  * 작품 내용을 보여줍니다.
@@ -16,10 +16,10 @@ export default async (request, response) => {
     const key = datastore.key(['Artwork', id])
     const [artwork = {}] = await datastore.get(key)
     await Promise.all([
-      update(['Artwork', id], artwork => ({ views: (artwork.views || 0) + 1 })),
+      updateCounter(id, 'views', 1),
       updatePopularity(id, 1),
     ])
-    response.status(200).send({ artwork })
+    response.status(200).send(artwork)
   } catch (error) {
     console.error(error)
     response.status(422).send(error)

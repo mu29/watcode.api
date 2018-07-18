@@ -1,27 +1,23 @@
-import { readCommentList, createComment, deleteComment } from '../modules'
+import { readBookmarkList, createBookmark, deleteBookmark } from '../modules'
 
 export default (request, response) => {
   switch (request.method) {
     case 'GET':
-      if (!request.url.match(/artworks\/(\d+)\/comments.*/)) {
-        response.status(422).send({ message: '함수의 경로가 잘못되었습니다.' })
-        return
-      }
-      readCommentList(request, response)
+      readBookmarkList(request, response)
       break
     case 'POST':
-      if (!request.url.match(/artworks\/(\d+)\/comments.*/)) {
+      if (!request.url.match(/artworks\/(\d+)\/bookmarks.*/)) {
         response.status(422).send({ message: '함수의 경로가 잘못되었습니다.' })
         return
       }
-      createComment(request, response)
+      createBookmark(request, response)
       break
     case 'DELETE':
-      if (!request.url.match(/comments\/(\d+)/)) {
+      if (!request.url.match(/bookmarks\/(\d+)/)) {
         response.status(422).send({ message: '함수의 경로가 잘못되었습니다.' })
         return
       }
-      deleteComment(request, response)
+      deleteBookmark(request, response)
       break
     case 'OPTIONS':
       response.status(200).end()
