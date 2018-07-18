@@ -16,6 +16,7 @@ export default async (request, response) => {
   const query = datastore
     .createQuery('Artwork')
     .filter(type, '>=', type === 'id' ? parseInt(value) : value)
+    .order('id', { descending: true })
     .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
