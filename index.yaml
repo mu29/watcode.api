@@ -4,3 +4,9 @@ indexes:
   properties:
   - name: artworkId
   - name: createdAt
+
+- kind: Artwork
+  properties:
+  - name: tags
+  - name: id
+    direction: desc
