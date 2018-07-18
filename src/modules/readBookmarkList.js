@@ -18,14 +18,13 @@ export default async (request, response) => {
 
   try {
     const [entities] = await datastore.runQuery(query)
-    const bookmarks = entities.map(entity => {
-      delete entity.userId
-      return {
-        id: entity[datastore.KEY].id,
-        ...entity,
-      }
+    const ids = entities.map(e => e.artworkId)
+    const keys = ids.map(id => datastore.key(['Artwork', id]))
+    const [artworks] = await datastore.get(keys)
+
+    response.status(200).send({
+      artworks: artworks.sort((a, b) => ids.indexOf(a.id) > ids.indexOf(b.id)),
     })
-    response.status(200).send({ bookmarks })
   } catch (error) {
     console.error(error)
     response.status(422).send(error)
