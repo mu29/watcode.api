@@ -1,6 +1,7 @@
 import {
   readArtwork,
   readArtworkList,
+  searchArtworkList,
   readPopularArtworkList,
 } from '../modules'
 
@@ -9,6 +10,11 @@ export default (request, response) => {
     case 'GET':
       if (request.url.match(/artworks\/popular.*/)) {
         readPopularArtworkList(request, response)
+        return
+      }
+
+      if (request.url.match(/artworks\/search.*/)) {
+        searchArtworkList(request, response)
         return
       }
 
