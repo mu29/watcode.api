@@ -19,7 +19,7 @@ export default async (request, response) => {
       update(['Artwork', id], artwork => ({ views: (artwork.views || 0) + 1 })),
       updatePopularity(id, 1),
     ])
-    response.status(200).send({ artwork })
+    response.status(200).send(artwork)
   } catch (error) {
     console.error(error)
     response.status(422).send(error)

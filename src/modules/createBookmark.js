@@ -36,11 +36,9 @@ export default async (request, response) => {
       update(['Artwork', id], artwork => ({ bookmarks: (artwork.bookmarks || 0) + 1 })),
       updatePopularity(id, 20),
     ])
-    response.status(201).send({
-      id,
-      email,
-      createdAt,
-    })
+    const key = datastore.key(['Artwork', id])
+    const [artwork = {}] = await datastore.get(key)
+    response.status(201).send(artwork)
   } catch (error) {
     console.error(error)
     response.status(422).send(error)
