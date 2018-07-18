@@ -1,5 +1,5 @@
-import { datastore, update } from '../services/database'
-import updatePopularity from './updatePopularity'
+import { datastore } from '../services/database'
+import { updateCounter, updatePopularity } from '../helpers'
 
 /**
  * 작품에 댓글을 남깁니다.
@@ -43,7 +43,7 @@ export default async (request, response) => {
     })
     const { id } = apiResponse.mutationResults[0].key.path[0]
     await Promise.all([
-      update(['Artwork', artworkId], artwork => ({ comments: (artwork.comments || 0) + 1 })),
+      updateCounter(artworkId, 'comments', 1),
       updatePopularity(artworkId, 10),
     ])
     response.status(201).send({

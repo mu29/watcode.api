@@ -1,5 +1,5 @@
-import { datastore, update } from '../services/database'
-import updatePopularity from './updatePopularity'
+import { datastore } from '../services/database'
+import { updateCounter, updatePopularity } from '../helpers'
 
 /**
  * 작품을 즐겨찾기에 추가합니다.
@@ -33,11 +33,11 @@ export default async (request, response) => {
           createdAt,
         }
       }),
-      update(['Artwork', id], artwork => ({ bookmarks: (artwork.bookmarks || 0) + 1 })),
+      updateCounter(id, 'bookmarks', 1),
       updatePopularity(id, 20),
     ])
-    const key = datastore.key(['Artwork', id])
-    const [artwork = {}] = await datastore.get(key)
+    const artworkKey = datastore.key(['Artwork', id])
+    const [artwork = {}] = await datastore.get(artworkKey)
     response.status(201).send(artwork)
   } catch (error) {
     console.error(error)
