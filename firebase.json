@@ -12,9 +12,6 @@
       }]
     }],
     "rewrites": [{
-      "source": "/artworks/*/views",
-      "function": "views"
-    }, {
       "source": "/artworks/*/comments",
       "function": "comments"
     }, {
