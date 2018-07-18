@@ -18,11 +18,9 @@ export const update = async (key, data) => {
   }
 }
 
-export const find = async (kind, property, value) => {
-  const query = datastore
-    .createQuery(kind)
-    .filter(property, value)
-    .limit(1)
+export const find = async (kind, ...filters) => {
+  let query = datastore.createQuery(kind).limit(1)
+  filters.forEach(filter => query = query.filter(filter[0], filter[1]))
 
   const [entities] = await datastore.runQuery(query)
   const entity = entities[0] || {}
