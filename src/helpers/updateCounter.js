@@ -8,5 +8,11 @@ import { update } from '../services/database'
  * @param {Number} value 변경할 카운터 값입니다.
  */
 export default async (id, property, value) => {
-  await update(['Artwork', id], artwork => ({ [property]: (artwork[property] || 0) + value }))
+  await update(['Artwork', id], (artwork) => {
+    let updatedValue = (artwork[property] || 0) + value
+    if (updatedValue < 0) {
+      updatedValue = value < 0 ? 0 : 1
+    }
+    return { [property]: updatedValue }
+  })
 }
