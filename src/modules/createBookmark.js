@@ -12,7 +12,7 @@ import updatePopularity from './updatePopularity'
  */
 export default async (request, response) => {
   const pathRegex = /artworks\/(\d+)\/bookmarks/
-  const artworkId = parseInt(request.url.match(pathRegex)[1])
+  const id = parseInt(request.url.match(pathRegex)[1])
   const { email } = request.body
   const userId = request.get('Authorization')
   const key = datastore.key('Bookmark')
@@ -23,23 +23,21 @@ export default async (request, response) => {
   }
 
   try {
-    const [apiResponse] = await datastore.save({
-      key,
-      data: {
-        artworkId,
-        userId,
-        email,
-        createdAt,
-      }
-    })
-    const { id } = apiResponse.mutationResults[0].key.path[0]
     await Promise.all([
-      update(['Artwork', artworkId], artwork => ({ bookmarks: (artwork.bookmarks || 0) + 1 })),
-      updatePopularity(artworkId, 20),
+      datastore.save({
+        key,
+        data: {
+          artworkId: id,
+          userId,
+          email,
+          createdAt,
+        }
+      }),
+      update(['Artwork', id], artwork => ({ bookmarks: (artwork.bookmarks || 0) + 1 })),
+      updatePopularity(id, 20),
     ])
     response.status(201).send({
       id,
-      artworkId,
       email,
       createdAt,
     })
