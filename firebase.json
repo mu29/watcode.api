@@ -9,10 +9,16 @@
       }, {
         "key": "Access-Control-Allow-Headers",
         "value": "*"
+      }, {
+        "key": "Access-Control-Allow-Methods",
+        "value": "*"
       }]
     }],
     "rewrites": [{
       "source": "/bookmarks",
+      "function": "bookmarks"
+    }, {
+      "source": "/bookmarks/**",
       "function": "bookmarks"
     }, {
       "source": "/artworks/*/bookmarks",
