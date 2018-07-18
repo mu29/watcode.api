@@ -25,7 +25,7 @@ export const find = async (kind, ...filters) => {
   const [entities] = await datastore.runQuery(query)
   const entity = entities[0] || {}
   return {
-    id: entity[datastore.KEY].id,
+    id: parseInt(entity[datastore.KEY].id),
     ...entity,
   }
 }
