@@ -18,6 +18,10 @@ export default async (request, response) => {
   const key = datastore.key('Bookmark')
   const createdAt = new Date()
 
+  if (!userId) {
+    response.status(401).end()
+  }
+
   try {
     const [apiResponse] = await datastore.save({
       key,

@@ -8,12 +8,16 @@ import { datastore } from '../services/database'
  */
 export default async (request, response) => {
   const userId = request.get('Authorization')
+  if (!userId) {
+    response.status(401).end()
+  }
+
   const query = datastore
     .createQuery('Bookmark')
     .filter('userId', userId)
 
   try {
-    const [entities, info] = await datastore.runQuery(query)
+    const [entities] = await datastore.runQuery(query)
     const bookmarks = entities.map(entity => {
       delete entity.userId
       return {
