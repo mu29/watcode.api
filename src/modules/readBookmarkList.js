@@ -10,6 +10,7 @@ export default async (request, response) => {
   const userId = request.get('Authorization')
   if (!userId) {
     response.status(401).end()
+    return
   }
 
   const query = datastore

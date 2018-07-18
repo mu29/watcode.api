@@ -18,6 +18,7 @@ export default (request, response) => {
         return
       }
       deleteBookmark(request, response)
+      break
     case 'OPTIONS':
       response.status(200).end()
       break

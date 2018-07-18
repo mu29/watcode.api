@@ -22,6 +22,7 @@ export default async (request, response) => {
 
   if (!userId) {
     response.status(401).end()
+    return
   }
 
   if (!content || content.length === 0) {

@@ -16,19 +16,18 @@ export default async (request, response) => {
 
   if (!userId) {
     response.status(401).end()
+    return
   }
 
   try {
-    const bookmark = await find('Bookmark', 'artworkId', id)
+    const bookmark = await find('Bookmark', ['artworkId', id], ['userId', userId])
     const key = datastore.key(['Bookmark', bookmark.id])
     await Promise.all([
       datastore.delete(key),
       updateCounter(id, 'bookmarks', -1),
       updatePopularity(id, -20),
     ])
-    const artworkKey = datastore.key(['Artwork', id])
-    const [artwork = {}] = await datastore.get(artworkKey)
-    response.status(201).send(artwork)
+    response.status(200).end()
   } catch (error) {
     console.error(error)
     response.status(422).send(error)
