@@ -12,7 +12,7 @@ export default (request, response) => {
         return
       }
 
-      if (request.url.match(/artworks\/(\d+)/)) {
+      if (request.url.match(/artworks\/(\d+).*/)) {
         readArtwork(request, response)
         return
       }

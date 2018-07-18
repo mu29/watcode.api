@@ -12,6 +12,12 @@
       }]
     }],
     "rewrites": [{
+      "source": "/bookmarks",
+      "function": "bookmarks"
+    }, {
+      "source": "/artworks/*/bookmarks",
+      "function": "bookmarks"
+    }, {
       "source": "/artworks/*/comments",
       "function": "comments"
     }, {

@@ -7,6 +7,7 @@ import updatePopularity from './updatePopularity'
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {String} request.url 요청 경로는 /artworks/{id}/comments 의 형태로 이루어져야 합니다.
  * @param {Object} request.header.Authorization 댓글 작성자의 고유한 ID입니다.
+ * @param {Object} request.body.email 댓글 작성자의 메일 주소입니다.
  * @param {Object} request.body.author 댓글 작성자의 닉네임입니다.
  * @param {Object} request.body.content 댓글 내용입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
