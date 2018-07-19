@@ -14,6 +14,7 @@ export default async (request, response) => {
   const id = parseInt(request.url.match(pathRegex)[1])
   const userId = request.get('Authorization')
   const key = datastore.key(['Comment', id])
+  const artworkId = parseInt(request.query.artworkId)
 
   if (!userId) {
     response.status(401).end()
@@ -34,8 +35,8 @@ export default async (request, response) => {
 
     await Promise.all([
       datastore.delete(key),
-      updateCounter(id, 'comments', -1),
-      updatePopularity(id, -10),
+      updateCounter(artworkId, 'comments', -1),
+      updatePopularity(artworkId, -10),
     ])
     response.status(200).send({ id })
   } catch (error) {
