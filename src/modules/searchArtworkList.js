@@ -7,26 +7,15 @@ const RESULTS_PER_PAGE = 15
  *
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {String} request.query.query 검색어입니다.
- * @param {String} request.query.type 검색에 활용할 정보입니다.
  * @param {String} request.query.cursor 목록의 첫 아이템의 위치입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
  */
 export default async (request, response) => {
-  const { type, query: value } = request.query
-  let query = datastore.createQuery('Artwork').limit(RESULTS_PER_PAGE)
-
-  switch (type) {
-    case 'id':
-      query = query.filter(type, '>=', parseInt(value))
-      break
-    case 'artist':
-    case 'title':
-      query = query.filter(type, '>=', value)
-      break
-    case 'tags':
-      query = query.filter(type, '=', value).order('id', { descending: true })
-      break
-  }
+  const { query: value } = request.query
+  const query = datastore
+    .createQuery('Artwork')
+    .filter('search', '>=', value)
+    .limit(RESULTS_PER_PAGE)
 
   if (request.query.cursor) {
     query.start(request.query.cursor)
