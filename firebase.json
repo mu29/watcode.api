@@ -12,6 +12,9 @@
       }, {
         "key": "Access-Control-Allow-Methods",
         "value": "*"
+      }, {
+        "key": "Content-Type",
+        "value": "*"
       }]
     }],
     "rewrites": [{

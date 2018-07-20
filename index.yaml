@@ -10,3 +10,9 @@ indexes:
   - name: tags
   - name: id
     direction: desc
+
+- kind: Bookmark
+  properties:
+  - name: userId
+  - name: artworkId
+    direction: desc

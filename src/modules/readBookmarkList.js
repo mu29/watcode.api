@@ -16,6 +16,7 @@ export default async (request, response) => {
   const query = datastore
     .createQuery('Bookmark')
     .filter('userId', userId)
+    .order('artworkId', { descending: true })
 
   try {
     const [entities] = await datastore.runQuery(query)
