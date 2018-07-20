@@ -27,7 +27,7 @@ export default async (request, response) => {
     const [artworks] = await datastore.get(keys)
 
     response.status(200).send({
-      artworks: artworks.sort((a, b) => ids.indexOf(a.id) > ids.indexOf(b.id)),
+      artworks: artworks.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id)),
       cursor: info.moreResults !== datastore.NO_MORE_RESULTS ? info.endCursor : null,
     })
   } catch (error) {
