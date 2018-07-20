@@ -15,25 +15,25 @@
       }]
     }],
     "rewrites": [{
-      "source": "/bookmarks",
+      "source": "/api/bookmarks",
       "function": "bookmarks"
     }, {
-      "source": "/bookmarks/**",
+      "source": "/api/bookmarks/**",
       "function": "bookmarks"
     }, {
-      "source": "/artworks/*/bookmarks",
+      "source": "/api/artworks/*/bookmarks",
       "function": "bookmarks"
     }, {
-      "source": "/artworks/*/comments",
+      "source": "/api/artworks/*/comments",
       "function": "comments"
     }, {
-      "source": "/comments/**",
+      "source": "/api/comments/**",
       "function": "comments"
     }, {
-      "source": "/artworks",
+      "source": "/api/artworks",
       "function": "artworks"
     }, {
-      "source": "/artworks/**",
+      "source": "/api/artworks/**",
       "function": "artworks"
     }],
     "ignore": [
