@@ -16,7 +16,7 @@ export default async (request, response) => {
 
   try {
     const ids = await raccoon.recommendFor(userId, 100)
-    const keys = ids.map(id => datastore.key(['Artwork', id]))
+    const keys = ids.map(id => datastore.key(['Artwork', parseInt(id)]))
     const [artworks] = await datastore.get(keys)
 
     response.status(200).send({
