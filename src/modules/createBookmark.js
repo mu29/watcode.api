@@ -1,3 +1,4 @@
+import raccoon from 'raccoon'
 import { datastore } from '../services/database'
 import { updateCounter, updatePopularity } from '../helpers'
 
@@ -34,6 +35,7 @@ export default async (request, response) => {
           createdAt,
         }
       }),
+      raccoon.liked(userId, id),
       updateCounter(id, 'bookmarks', 1),
       updatePopularity(id, 20),
     ])

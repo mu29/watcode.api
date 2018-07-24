@@ -1,7 +1,8 @@
+import raccoon from 'raccoon'
 import { datastore } from '../services/database'
 
 /**
- * 사용자의 즐겨찾기 목록을 불러옵니다.
+ * 사용자별 추천 작품 목록을 불러옵니다.
  *
  * @param {Object} request Cloud Function의 request context 입니다.
  * @param {Object} response Cloud Function의 response context 입니다.
@@ -13,15 +14,9 @@ export default async (request, response) => {
     return
   }
 
-  const query = datastore
-    .createQuery('Bookmark')
-    .filter('userId', userId)
-    .order('artworkId', { descending: true })
-
   try {
-    const [entities] = await datastore.runQuery(query)
-    const ids = entities.map(e => e.artworkId)
-    const keys = ids.map(id => datastore.key(['Artwork', id]))
+    const ids = await raccoon.recommendFor(userId, 100)
+    const keys = ids.map(id => datastore.key(['Artwork', parseInt(id)]))
     const [artworks] = await datastore.get(keys)
 
     response.status(200).send({

@@ -1,3 +1,4 @@
+import raccoon from 'raccoon'
 import { datastore, find } from '../services/database'
 import { updateCounter, updatePopularity } from '../helpers'
 
@@ -29,6 +30,7 @@ export default async (request, response) => {
     const key = datastore.key(['Bookmark', bookmark.id])
     await Promise.all([
       datastore.delete(key),
+      raccoon.unliked(userId, id),
       updateCounter(id, 'bookmarks', -1),
       updatePopularity(id, -20),
     ])

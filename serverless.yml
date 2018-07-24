@@ -31,6 +31,11 @@ functions:
     events:
       - http: path
 
+  recommendations:
+    handler: recommendations
+    events:
+      - http: path
+
   # NOTE: the following uses an "event" event (pubSub event in this case).
   # Please create the corresponding resources in the Google Cloud
   # before deploying this service through Serverless
