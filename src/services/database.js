@@ -29,3 +29,11 @@ export const find = async (kind, ...filters) => {
     ...entity,
   }
 }
+
+export const exists = async (kind, ...filters) => {
+  let query = datastore.createQuery(kind).limit(1)
+  filters.forEach(filter => query = query.filter(filter[0], filter[1]))
+
+  const [entities] = await datastore.runQuery(query)
+  return entities.length > 0
+}
