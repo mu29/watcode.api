@@ -1,4 +1,4 @@
-import { readBookmarkList, createBookmark, deleteBookmark } from '../modules'
+import { readBookmarkList, createBookmark, createBookmarkList, deleteBookmark } from '../modules'
 
 export default (request, response) => {
   switch (request.method) {
@@ -6,6 +6,11 @@ export default (request, response) => {
       readBookmarkList(request, response)
       break
     case 'POST':
+      if (request.url.match(/bookmarks.*/)) {
+        createBookmarkList(request, response)
+        return
+      }
+
       if (!request.url.match(/artworks\/(\d+)\/bookmarks.*/)) {
         response.status(422).send({ message: '함수의 경로가 잘못되었습니다.' })
         return
