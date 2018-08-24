@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "static",
     "headers": [{
       "source": "**",
       "headers": [{
@@ -41,6 +41,9 @@
     }, {
       "source": "/api/artworks/**",
       "function": "artworks"
+    }, {
+      "source": "**",
+      "destination": "/index.html"
     }],
     "ignore": [
       "firebase.json",
