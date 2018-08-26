@@ -6,13 +6,15 @@ export const update = async (key, data) => {
   try {
     const entityKey = datastore.key(key)
     const [entity = {}] = await datastore.get(entityKey)
-    await datastore.save({
-      key: entityKey,
-      data: {
-        ...entity,
-        ...(typeof data === 'function' ? data(entity) : data),
-      }
-    })
+    if (entity) {
+      await datastore.save({
+        key: entityKey,
+        data: {
+          ...entity,
+          ...(typeof data === 'function' ? data(entity) : data),
+        }
+      })
+    }
   } catch (error) {
     console.error(error)
   }
