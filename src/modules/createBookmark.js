@@ -26,7 +26,9 @@ export default async (request, response) => {
 
   try {
     const hasBookmark = await exists('Bookmark', ['artworkId', id], ['userId', userId])
-    if (!hasBookmark) {
+    const artworkKey = datastore.key(['Artwork', id])
+    const [artwork = {}] = await datastore.get(artworkKey)
+    if (!hasBookmark && Object.keys(artwork).length > 0) {
       await Promise.all([
         datastore.save({
           key,
@@ -42,8 +44,6 @@ export default async (request, response) => {
         updatePopularity(id, 20),
       ])
     }
-    const artworkKey = datastore.key(['Artwork', id])
-    const [artwork = {}] = await datastore.get(artworkKey)
     response.status(201).send(artwork)
   } catch (error) {
     console.error(error)
