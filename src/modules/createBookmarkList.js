@@ -25,7 +25,9 @@ export default async (request, response) => {
   try {
     ids.forEach(async (id) => {
       const hasBookmark = await exists('Bookmark', ['artworkId', id], ['userId', userId])
-      if (!hasBookmark) {
+      const artworkKey = datastore.key(['Artwork', id])
+      const [artwork = {}] = await datastore.get(artworkKey)
+      if (!hasBookmark && Object.keys(artwork).length > 0) {
         await Promise.all([
           datastore.save({
             key: datastore.key('Bookmark'),
